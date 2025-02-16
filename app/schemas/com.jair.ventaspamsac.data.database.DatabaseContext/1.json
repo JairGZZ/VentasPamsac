@@ -1,0 +1,310 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b827343c0d71d249af4f82590bf450a1",
+    "entities": [
+      {
+        "tableName": "clients",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_client` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `phone_client` TEXT NOT NULL, `email_client` TEXT NOT NULL, `id_market` INTEGER NOT NULL, FOREIGN KEY(`id_market`) REFERENCES `markets`(`id_market`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "idClient",
+            "columnName": "id_client",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone_client",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email_client",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idMarket",
+            "columnName": "id_market",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_client"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_clients_id_market",
+            "unique": false,
+            "columnNames": [
+              "id_market"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_clients_id_market` ON `${TABLE_NAME}` (`id_market`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "markets",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_market"
+            ],
+            "referencedColumns": [
+              "id_market"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "markets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_market` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `district` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idMarket",
+            "columnName": "id_market",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "district",
+            "columnName": "district",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_market"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "districts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_district` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idDistrict",
+            "columnName": "id_district",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_district"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "products",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_product` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `price` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idProduct",
+            "columnName": "id_product",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_product"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sales",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_sale` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `id_client` INTEGER NOT NULL, FOREIGN KEY(`id_client`) REFERENCES `clients`(`id_client`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "idSale",
+            "columnName": "id_sale",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idClient",
+            "columnName": "id_client",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_sale"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_sales_id_client",
+            "unique": false,
+            "columnNames": [
+              "id_client"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sales_id_client` ON `${TABLE_NAME}` (`id_client`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "clients",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_client"
+            ],
+            "referencedColumns": [
+              "id_client"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "sale_details",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_sale_detail` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_sale` INTEGER NOT NULL, `id_product` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `subtotal` REAL NOT NULL, FOREIGN KEY(`id_sale`) REFERENCES `sales`(`id_sale`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`id_product`) REFERENCES `products`(`id_product`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "idSaleDetail",
+            "columnName": "id_sale_detail",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSale",
+            "columnName": "id_sale",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idProduct",
+            "columnName": "id_product",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subtotal",
+            "columnName": "subtotal",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id_sale_detail"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_sale_details_id_sale",
+            "unique": false,
+            "columnNames": [
+              "id_sale"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sale_details_id_sale` ON `${TABLE_NAME}` (`id_sale`)"
+          },
+          {
+            "name": "index_sale_details_id_product",
+            "unique": false,
+            "columnNames": [
+              "id_product"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sale_details_id_product` ON `${TABLE_NAME}` (`id_product`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "sales",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_sale"
+            ],
+            "referencedColumns": [
+              "id_sale"
+            ]
+          },
+          {
+            "table": "products",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_product"
+            ],
+            "referencedColumns": [
+              "id_product"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b827343c0d71d249af4f82590bf450a1')"
+    ]
+  }
+}
