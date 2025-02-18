@@ -1,8 +1,5 @@
 package com.jair.ventaspamsac.Aprendizaje
 
-import androidx.room.Index
-import java.util.Stack
-
 class Solution {
 
 //    22. Generate Parentheses
@@ -64,15 +61,15 @@ class Solution {
             }
         }
 
-        return index +1
+        return index + 1
     }
 
     fun removeElement(nums: IntArray, n: Int): Int {
 
         var contador = 0
 
-        for (i in nums.indices){
-            if (nums[i] !=n ){
+        for (i in nums.indices) {
+            if (nums[i] != n) {
 
                 nums[contador] = nums[i]
                 contador++
@@ -81,31 +78,31 @@ class Solution {
 
         }
 
-        return  contador
+        return contador
     }
-    fun substring(haystack: String,startIndex:Int ,endIndex: Int):String{
+
+    fun substring(haystack: String, startIndex: Int, endIndex: Int): String {
         var stringBuilder = StringBuilder()
-        for (i in startIndex..endIndex){
+        for (i in startIndex..endIndex) {
             stringBuilder.append(haystack[i])
         }
         return stringBuilder.toString()
     }
+
     fun strStr(haystack: String, needle: String): Int {
         if (needle.isEmpty()) return 0
 
         for (i in 0..haystack.length - needle.length) {
-            if (substring(haystack,i,i+needle.length) == needle) {
+            if (substring(haystack, i, i + needle.length) == needle) {
                 return i
             }
         }
-
-
         return -1
     }
 
     fun astrStr(haystack: String, needle: String): Int {
         if (needle.isEmpty()) return 0
-        for (i in 0 ..  haystack.length - needle.length) {
+        for (i in 0..haystack.length - needle.length) {
             var match = true
             for (j in needle.indices) {
                 if (haystack[i + j] != needle[j]) {
@@ -120,12 +117,10 @@ class Solution {
         return -1
     }
 
-    //mi resolucion
+    //mi solucion
 
-//    fun searchInsert(nums: IntArray, target: Int): Int {
-//        if (target < nums[0]){
-//            return 0
-//        }
+    //    fun searchInsert(nums: IntArray, target: Int): Int {
+//
 //        if (target > nums[nums.size-1]){
 //            return nums.size
 //        }
@@ -149,11 +144,37 @@ class Solution {
 //        }
 //
 //
-//        return 4
+//        return 0
 //    }
 
+fun lengthOfLastWord(s: String): Int {
+    if(s.length ==1 && s[0] != ' '){
+        return 1
+    }
+    var high = s.length-1
 
-    // solucion con busqueda binaria
+    var lengthLastWord = 0
+
+    for (i in high  downTo 0) {
+
+        var ind = i
+        if (s[i] !=' ')
+        {
+           while (s[ind] != ' ' && ind != -1){
+               lengthLastWord++
+               ind--}
+
+        }
+            return lengthLastWord
+    }
+
+    return  lengthLastWord
+
+}
+
+
+
+// solucion con busqueda binaria
     fun searchInsert(nums: IntArray, target: Int): Int {
         var low = 0
         var high = nums.size - 1
@@ -176,6 +197,7 @@ class Solution {
 
 
 }
+
 fun main() {
     val numeros = IntArray(5) // Crea un arreglo de 5 elementos inicializados en 0
     numeros[0] = 1
@@ -188,7 +210,7 @@ fun main() {
 //    numeros[7] = 9
 
 
-    val solution = Solution().searchInsert(numeros,3)
+    val solution = Solution().lengthOfLastWord("   fly me   to   the moon  ")
 //    val str = Solution().strStr("hellallo","llo")
 
     val mutable = mutableListOf<Char>()
@@ -198,7 +220,6 @@ fun main() {
     mutable.add('c')
 
     println(solution)
-
 
 
 //    println(str)

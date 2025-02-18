@@ -1,5 +1,6 @@
 package com.jair.ventaspamsac.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jair.ventaspamsac.ClientsActivity
 import com.jair.ventaspamsac.R
 import com.jair.ventaspamsac.data.TypeOperation
 import com.jair.ventaspamsac.databinding.ActivityMainBinding
@@ -159,20 +161,13 @@ class HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
         Log.v("NOTA_ITEM", market.name)
         Log.v("NOTA_ITEM", market.idMarket.toString())
 
-        val bundle = Bundle().apply {
-            putParcelable("market", market)
-        }
+        val intent = Intent(requireContext(), ClientsActivity::class.java)
 
-        // Crear una instancia del fragmento de detalles
-        val marketDetailsFragment = DashboardFragment().apply {
-            arguments = bundle
-        }
+
+        intent.putExtra("id_market", market.idMarket)
 
         // Reemplazar el fragmento actual con el fragmento de detalles
-        parentFragmentManager.commit {
-            replace(R.id.nav_host_fragment_activity_main, marketDetailsFragment)
-            addToBackStack(null) // Opcional: permite volver al fragmento anterior
-        }
+        startActivity(intent)
 
     }
 

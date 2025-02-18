@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b827343c0d71d249af4f82590bf450a1",
+    "identityHash": "643e5ae8bd05eb51b83cce4484da6118",
     "entities": [
       {
         "tableName": "clients",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_client` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `phone_client` TEXT NOT NULL, `email_client` TEXT NOT NULL, `id_market` INTEGER NOT NULL, FOREIGN KEY(`id_market`) REFERENCES `markets`(`id_market`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_client` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `last_name_client` TEXT NOT NULL, `phone_client` TEXT NOT NULL, `store_number_client` TEXT NOT NULL, `id_market` INTEGER NOT NULL, FOREIGN KEY(`id_market`) REFERENCES `markets`(`id_market`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "idClient",
@@ -21,14 +21,20 @@
             "notNull": true
           },
           {
+            "fieldPath": "lastName",
+            "columnName": "last_name_client",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "phone",
             "columnName": "phone_client",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "email",
-            "columnName": "email_client",
+            "fieldPath": "storeNumber",
+            "columnName": "store_number_client",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -304,7 +310,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b827343c0d71d249af4f82590bf450a1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '643e5ae8bd05eb51b83cce4484da6118')"
     ]
   }
 }

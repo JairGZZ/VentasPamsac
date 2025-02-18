@@ -24,12 +24,15 @@ data class ClientEntity(
     var idClient: Int = 0,
     @ColumnInfo(name = "name")
     val name: String,
+    @ColumnInfo(name = "last_name_client")
+    val lastName: String,
     @ColumnInfo(name = "phone_client")
     val phone: String,
-    @ColumnInfo(name = "email_client")
-    val email: String,
-    @ColumnInfo(name = "id_market") val
-    idMarket: Int
+    @ColumnInfo(name = "store_number" +
+            "_client")
+    val storeNumber: String,
+    @ColumnInfo(name = "id_market")
+    val idMarket: Int
 ) {
     companion object {
         const val TABLE_NAME = "clients"
