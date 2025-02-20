@@ -10,20 +10,15 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jair.ventaspamsac.ClientsActivity
+import com.jair.ventaspamsac.ui.clients.ClientsActivity
 import com.jair.ventaspamsac.R
 import com.jair.ventaspamsac.data.TypeOperation
-import com.jair.ventaspamsac.databinding.ActivityMainBinding
 import com.jair.ventaspamsac.databinding.FragmentHomeBinding
 import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.adapter.MarketAdapter
-import com.jair.ventaspamsac.ui.dashboard.DashboardFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

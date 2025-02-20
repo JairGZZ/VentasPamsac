@@ -20,6 +20,7 @@ class HomeViewModel @Inject constructor(
         insertMarketUseCase(marketItem)
          }
     }
+
     val items = getAllMarketsUseCase()
     fun updateMarket(market: MarketItem) {
         viewModelScope.launch {

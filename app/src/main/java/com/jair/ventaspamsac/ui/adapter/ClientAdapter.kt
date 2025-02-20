@@ -8,7 +8,7 @@ import com.jair.ventaspamsac.domain.items.ClientItem
 import com.jair.ventaspamsac.ui.viewholder.ClientViewHolder
 import com.jair.ventaspamsac.ui.viewholder.MarketViewHolder
 
-class ClientAdapter ( ) : RecyclerView.Adapter<ClientViewHolder>(){
+class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerView.Adapter<ClientViewHolder>(){
     private var originalList = emptyList<ClientItem>()
     private var filteredList = emptyList<ClientItem>()
 
@@ -25,7 +25,7 @@ class ClientAdapter ( ) : RecyclerView.Adapter<ClientViewHolder>(){
 
         holder.itemView.setOnClickListener {
 
-//            mItemListener.onItemClick(filteredList[position])
+            mItemListener.onItemClick(filteredList[position])
         }
     }
 

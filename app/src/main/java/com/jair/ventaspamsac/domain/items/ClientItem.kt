@@ -22,7 +22,7 @@ fun ClientEntity.toClientItem(): ClientItem{
     )
 }
 fun ClientItem.toClientEntity() = ClientEntity(
-    idClient = 0,
+    idClient = idClient,
     name = name,
     lastName = lastName,
     phone = phone,

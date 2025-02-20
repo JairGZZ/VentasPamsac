@@ -1,29 +1,32 @@
-package com.jair.ventaspamsac
+package com.jair.ventaspamsac.ui.clients
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
+
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jair.ventaspamsac.R
 import com.jair.ventaspamsac.data.TypeOperation
 import com.jair.ventaspamsac.databinding.ActivityClientsBinding
+import com.jair.ventaspamsac.databinding.DialogClientBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
+import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.adapter.ClientAdapter
-import com.jair.ventaspamsac.ui.clients.ClientsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ClientsActivity : AppCompatActivity() {
+class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
 
     private val clientsViewModel: ClientsViewModel by viewModels()
     private lateinit var binding: ActivityClientsBinding
+    private lateinit var bindingD: DialogClientBinding
     private var currentQuery = ""
     private lateinit var adapter: ClientAdapter
 
@@ -32,6 +35,8 @@ class ClientsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityClientsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val id = intent.getIntExtra("id_market", -1)
         if (id != -1) {
@@ -51,7 +56,7 @@ class ClientsActivity : AppCompatActivity() {
         }
     }
     private fun setupRecyclerView() {
-        adapter = ClientAdapter()
+        adapter = ClientAdapter(this)
         binding.recyclerMarkets.apply {
             layoutManager = LinearLayoutManager(this@ClientsActivity)
             adapter = this@ClientsActivity.adapter
@@ -89,79 +94,88 @@ class ClientsActivity : AppCompatActivity() {
             registerUpdateClient(null, TypeOperation.REGISTER)
         }
     }
+    override fun onItemClick(client: ClientItem) {
+
+        Log.v("NOTA_ITEM", client.name)
+        Log.v("NOTA_ITEM", client.lastName)
+        Log.v("NOTA_ITEM", client.phone)
+        Log.v("NOTA_ITEM", client.storeNumber)
+        Log.v("NOTA_ITEM", client.idClient.toString())
+
+        registerUpdateClient( client, TypeOperation.UPDATE)
+
+    }
+
 
     private fun registerUpdateClient(client: ClientItem?, type: TypeOperation) {
-        val mDialogView = LayoutInflater.from(this)
-            .inflate(R.layout.dialog_client, null)
-        val titleAlertNote = "Agregar Cliente"
+        // Infla el layout del diálogo y obtén su binding
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_client, null)
+        bindingD = DialogClientBinding.bind(mDialogView) // Inicializa bindingD aquí
 
-
+        val titleAlertNote = if (type == TypeOperation.UPDATE) "Actualizar Cliente" else "Agregar Cliente"
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle(titleAlertNote)
+
         val mAlertDialog = mBuilder.show()
 
-        val edtClientName = mDialogView.findViewById<EditText>(R.id.edtName)
-        val edtClientLastName = mDialogView.findViewById<EditText>(R.id.edtLastName)
-        val edtClientPhone = mDialogView.findViewById<EditText>(R.id.edtPhone)
-        val edtClientStoreNumber = mDialogView.findViewById<EditText>(R.id.edtStoreNumber)
-        val btnCreate = mDialogView.findViewById<Button>(R.id.btnCreate)
-
+        // Si es una actualización, rellena los campos con los datos del cliente
         if (type == TypeOperation.UPDATE) {
-            edtClientName.setText(client?.name)
-            edtClientLastName.setText(client?.lastName)
-            edtClientPhone.setText(client?.phone)
-            edtClientStoreNumber.setText(client?.storeNumber)
+            bindingD.edtName.setText(client?.name)
+            bindingD.edtLastName.setText(client?.lastName)
+            bindingD.edtPhone.setText(client?.phone)
+            bindingD.edtStoreNumber.setText(client?.storeNumber)
         }
 
-        btnCreate.setOnClickListener {
-            val name = edtClientName.text.toString().trim()
-            val lastName = edtClientLastName.text.toString().trim()
-            val phone = edtClientPhone.text.toString().trim()
-            val storeNumber = edtClientStoreNumber.text.toString().trim()
+        // Configura el botón de crear/actualizar
+        bindingD.btnCreate.setOnClickListener {
+            val name = bindingD.edtName.text.toString().trim()
+            val lastName = bindingD.edtLastName.text.toString().trim()
+            val phone = bindingD.edtPhone.text.toString().trim()
+            val storeNumber = bindingD.edtStoreNumber.text.toString().trim()
 
+            // Validaciones
             if (name.isEmpty()) {
-                edtClientName.error = "El nombre es requerido"
-                edtClientName.requestFocus()
+                bindingD.edtName.error = "El nombre es requerido"
+                bindingD.edtName.requestFocus()
                 return@setOnClickListener
             }
-
             if (lastName.isEmpty()) {
-                edtClientLastName.error = "El apellido es requerido"
-                edtClientLastName.requestFocus()
+                bindingD.edtLastName.error = "El apellido es requerido"
+                bindingD.edtLastName.requestFocus()
                 return@setOnClickListener
             }
             if (phone.isEmpty()) {
-                edtClientPhone.error = "El numero de telefono es requerido"
-                edtClientPhone.requestFocus()
+                bindingD.edtPhone.error = "El número de teléfono es requerido"
+                bindingD.edtPhone.requestFocus()
                 return@setOnClickListener
             }
 
-
+            // Cierra el diálogo
             mAlertDialog.dismiss()
 
+            // Crea el objeto ClientItem
             val clientItem = ClientItem(
-                idClient = 0,
+                idClient = if (type == TypeOperation.UPDATE) client!!.idClient else 0,
                 name = name,
                 lastName = lastName,
                 phone = phone,
                 storeNumber = storeNumber,
-                idMarket = intent.getIntExtra("id_market", 2)
-
+                idMarket = intent.getIntExtra("id_market", -1)
             )
 
-//            if (type == TypeOperation.UPDATE) {
-//                clientItem.idClient = client!!.idClient
-//                clientsViewModel.up(marketItem)
-//            } else {
-                clientsViewModel.viewModelScope.launch {
+            // Inserta o actualiza el cliente según el tipo de operación
+            clientsViewModel.viewModelScope.launch {
+                if (type == TypeOperation.UPDATE) {
+                    clientsViewModel.up(clientItem)
+                } else {
                     clientsViewModel.insert(clientItem)
-
                 }
-//            }
+            }
         }
+    }
+
     }
 
 
 
-}
