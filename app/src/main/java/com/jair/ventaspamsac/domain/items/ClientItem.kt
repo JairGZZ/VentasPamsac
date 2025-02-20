@@ -8,7 +8,8 @@ data class ClientItem(
     var name:String,
     var lastName:String,
     var phone:String,
-    var storeNumber:String
+    var storeNumber:String,
+    var idMarket:Int
 )
 fun ClientEntity.toClientItem(): ClientItem{
     return ClientItem(
@@ -16,7 +17,8 @@ fun ClientEntity.toClientItem(): ClientItem{
         name = name,
         lastName = lastName,
         phone = phone,
-        storeNumber = storeNumber
+        storeNumber = storeNumber,
+        idMarket = idMarket
     )
 }
 fun ClientItem.toClientEntity() = ClientEntity(
@@ -25,7 +27,7 @@ fun ClientItem.toClientEntity() = ClientEntity(
     lastName = lastName,
     phone = phone,
     storeNumber = storeNumber,
-    idMarket = 0
+    idMarket = idMarket
 )
 
 

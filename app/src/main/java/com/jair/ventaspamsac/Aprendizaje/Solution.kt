@@ -146,31 +146,47 @@ class Solution {
 //
 //        return 0
 //    }
+//
+    //no pude
+//fun lengthOfLastWord(s: String): Int {
+//    if(s.length ==1 && s[0] != ' '){
+//        return 1
+//    }
+//    var high = s.length-1
+//
+//    var lengthLastWord = 0
+//
+//    for (i in high  downTo 0) {
+//
+//        var ind = i
+//        if (s[i] !=' ')
+//        {
+//           while (s[ind] != ' ' && ind != -1){
+//               lengthLastWord++
+//               ind--}
+//
+//        }
+//            return lengthLastWord
+//    }
+//
+//    return  lengthLastWord
+//
+//}
 
-fun lengthOfLastWord(s: String): Int {
-    if(s.length ==1 && s[0] != ' '){
-        return 1
-    }
-    var high = s.length-1
+    fun lengthOfLastWord(s: String): Int {
+        var end = s.length - 1
 
-    var lengthLastWord = 0
-
-    for (i in high  downTo 0) {
-
-        var ind = i
-        if (s[i] !=' ')
-        {
-           while (s[ind] != ' ' && ind != -1){
-               lengthLastWord++
-               ind--}
-
+        while (end >= 0 && s[end] == ' ') {
+            end--
         }
-            return lengthLastWord
+        if (end < 0) return 0
+
+        var start = end
+        while (start >= 0 && s[start] != ' ') {
+            start--
+        }
+        return end - start
     }
-
-    return  lengthLastWord
-
-}
 
 
 
@@ -196,21 +212,56 @@ fun lengthOfLastWord(s: String): Int {
     }
 
 
+        fun plusOne(digits: IntArray): IntArray {
+            var b = mutableListOf<Int>()
+            b.add(1)
+
+
+
+            if (digits[(digits.size-1)] + 1 == 10 && digits.size > 1){
+                digits[(digits.size-1)] = 0
+                digits[(digits.size-2)] = 1
+
+
+            }
+
+            if (digits[digits.size-1] == 9){
+
+
+            for (i in 1 until digits.size-1)
+            {
+                if (digits[i] == 9){
+                    b.add(0)
+                }
+            }
+                return b.toIntArray()
+
+            }
+            else {
+                val n = digits[digits.size -1] + 1
+                digits[digits.size - 1] = n
+            }
+
+
+
+
+            return digits
+
+    }
+
+
 }
 
 fun main() {
-    val numeros = IntArray(5) // Crea un arreglo de 5 elementos inicializados en 0
-    numeros[0] = 1
-    numeros[1] = 2
-    numeros[2] = 4
-    numeros[3] = 6
-    numeros[4] = 7
+    val numeros = IntArray(1) // Crea un arreglo de 5 elementos inicializados en 0
+    numeros[0] = 9
+
 //    numeros[5] = 6
 //    numeros[6] = 8
 //    numeros[7] = 9
 
 
-    val solution = Solution().lengthOfLastWord("   fly me   to   the moon  ")
+    val solution = Solution().plusOne(numeros)
 //    val str = Solution().strStr("hellallo","llo")
 
     val mutable = mutableListOf<Char>()

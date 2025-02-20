@@ -28,8 +28,7 @@ data class ClientEntity(
     val lastName: String,
     @ColumnInfo(name = "phone_client")
     val phone: String,
-    @ColumnInfo(name = "store_number" +
-            "_client")
+    @ColumnInfo(name = "store_number_client")
     val storeNumber: String,
     @ColumnInfo(name = "id_market")
     val idMarket: Int

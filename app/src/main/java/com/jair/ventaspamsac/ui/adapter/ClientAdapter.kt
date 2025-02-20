@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jair.ventaspamsac.databinding.ClientItemBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
 import com.jair.ventaspamsac.ui.viewholder.ClientViewHolder
+import com.jair.ventaspamsac.ui.viewholder.MarketViewHolder
 
-class ClientAdapter ( private val mItemListener: ItemClickListener) : RecyclerView.Adapter<ClientViewHolder>(){
+class ClientAdapter ( ) : RecyclerView.Adapter<ClientViewHolder>(){
     private var originalList = emptyList<ClientItem>()
     private var filteredList = emptyList<ClientItem>()
 
@@ -24,7 +25,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener) : RecyclerVi
 
         holder.itemView.setOnClickListener {
 
-            mItemListener.onItemClick(filteredList[position])
+//            mItemListener.onItemClick(filteredList[position])
         }
     }
 

@@ -14,10 +14,10 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edtMarketName"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del Mercado"
+            android:hint="Nombre"
             android:maxLines="1"
             android:inputType="textCapWords"
             android:layout_marginTop="16dp"
@@ -25,22 +25,45 @@
             android:layout_marginRight="4dp"
             android:layout_marginBottom="4dp" />
 
+
         <EditText
-            android:id="@+id/edtMarketDistrict"
+            android:id="@+id/edtLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:gravity="top|left"
-            android:hint="Distrito del Mercado"
-            android:lines="8"
-            android:maxLines="10"
-            android:minLines="6"
+            android:hint="Apellido"
+            android:lines="1"
+            android:maxLines="2"
+            android:minLines="1"
             android:scrollbars="vertical"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif"/>
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numero de Telefono"
+            android:maxLines="1"
+            android:inputType="phone"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp" />
+        <EditText
+            android:id="@+id/edtStoreNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numero de Puesto"
+            android:maxLines="1"
+            android:inputType="number"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp" />
 
         <Button
             android:id="@+id/btnCreate"
