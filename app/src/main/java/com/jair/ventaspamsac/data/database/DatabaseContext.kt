@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import com.jair.ventaspamsac.data.database.dao.ClientDAO
 import com.jair.ventaspamsac.data.database.dao.DistrictDAO
 import com.jair.ventaspamsac.data.database.dao.MarketDAO
+import com.jair.ventaspamsac.data.database.dao.NoteDAO
 import com.jair.ventaspamsac.data.database.dao.ProductDAO
 import com.jair.ventaspamsac.data.database.dao.SaleDAO
 import com.jair.ventaspamsac.data.database.dao.SaleDetailDAO
@@ -27,5 +28,6 @@ abstract class DatabaseContext : RoomDatabase() {
     abstract fun productDAO(): ProductDAO
     abstract fun saleDAO(): SaleDAO
     abstract fun saleDetailDAO(): SaleDetailDAO
+    abstract fun noteDAO(): NoteDAO
 
 }

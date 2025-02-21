@@ -6,6 +6,7 @@ import com.jair.ventaspamsac.data.database.DatabaseContext
 import com.jair.ventaspamsac.data.database.dao.ClientDAO
 import com.jair.ventaspamsac.data.database.dao.DistrictDAO
 import com.jair.ventaspamsac.data.database.dao.MarketDAO
+import com.jair.ventaspamsac.data.database.dao.NoteDAO
 import com.jair.ventaspamsac.data.database.dao.ProductDAO
 import com.jair.ventaspamsac.data.database.dao.SaleDAO
 import com.jair.ventaspamsac.data.database.dao.SaleDetailDAO
@@ -30,6 +31,10 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideClientDAO(db: DatabaseContext): ClientDAO = db.clientDAO()
+
+    @Singleton
+    @Provides
+    fun provideNoteDAO(db: DatabaseContext): NoteDAO = db.noteDAO()
 
     @Singleton
     @Provides

@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_marginBottom="11dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- CardView para mostrar la información del cliente -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp"
         android:layout_margin="10dp">
 
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:id="@+id/textClientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 tools:text="Nombre: Juan" />
@@ -36,8 +36,8 @@
                 android:id="@+id/textClientLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 tools:text="Apellido: Pérez" />
@@ -47,8 +47,8 @@
                 android:id="@+id/textStoreNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 tools:text="Número de Tienda: 12345" />
@@ -58,12 +58,28 @@
                 android:id="@+id/textPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
                 android:autoLink="phone"
                 android:textColor="#0000FF"
                 android:textStyle="bold"
-            tools:text="Teléfono: +123456789" />
+                tools:text="Teléfono: +123456789" />
+
+            <!-- Botón para Crear Nota -->
+            <Button
+                android:id="@+id/btnCreateNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#4CAF50"
+                android:text="Crear Nota"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:padding="10dp" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
+
 </LinearLayout>
