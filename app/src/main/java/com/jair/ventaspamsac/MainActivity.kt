@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
 
-        //descomentar esto solo si quieres configurar la barra de acción superior xd
+        //descomentar esto solo si quieres configurar la barra de acción superior
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications

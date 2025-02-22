@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.jair.ventaspamsac.databinding.ActivityNoteBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
 
     private val noteViewModel: NoteViewModel by viewModels()
@@ -18,6 +20,10 @@ class NoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val clientId = intent.getIntExtra("clientId", -1)
+
+        
 
     }
 }

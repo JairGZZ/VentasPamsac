@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 
 }
 android {
@@ -54,6 +55,10 @@ dependencies {
     //dagger hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+
+
     //otras
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

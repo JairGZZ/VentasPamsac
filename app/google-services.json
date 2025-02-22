@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197005806022",
+    "project_id": "pamsacventas",
+    "storage_bucket": "pamsacventas.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197005806022:android:b2ca946ec44cdca19e8ac7",
+        "android_client_info": {
+          "package_name": "com.jair.ventaspamsac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxI0BtYyS1jB1cWsTpgth1sg0sVNWcM6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

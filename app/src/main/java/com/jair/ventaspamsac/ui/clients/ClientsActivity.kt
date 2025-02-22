@@ -1,5 +1,6 @@
 package com.jair.ventaspamsac.ui.clients
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +16,11 @@ import com.jair.ventaspamsac.R
 import com.jair.ventaspamsac.data.TypeOperation
 import com.jair.ventaspamsac.databinding.ActivityClientsBinding
 import com.jair.ventaspamsac.databinding.DialogClientBinding
+import com.jair.ventaspamsac.databinding.ItemClientsBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
 import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.adapter.ClientAdapter
+import com.jair.ventaspamsac.ui.note.NoteActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -27,6 +30,8 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
     private val clientsViewModel: ClientsViewModel by viewModels()
     private lateinit var binding: ActivityClientsBinding
     private lateinit var bindingD: DialogClientBinding
+    private lateinit var bindingItem: ItemClientsBinding
+
     private var currentQuery = ""
     private lateinit var adapter: ClientAdapter
 
@@ -55,6 +60,14 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
 
         }
     }
+
+
+    override fun onCreateNoteClick(clientId: Int) {
+        val intent = Intent(this, NoteActivity::class.java)
+        intent.putExtra("id_client", clientId) // Pasa el ID del cliente
+        startActivity(intent)
+    }
+
     private fun setupRecyclerView() {
         adapter = ClientAdapter(this)
         binding.recyclerMarkets.apply {
@@ -95,13 +108,6 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
         }
     }
     override fun onItemClick(client: ClientItem) {
-
-        Log.v("NOTA_ITEM", client.name)
-        Log.v("NOTA_ITEM", client.lastName)
-        Log.v("NOTA_ITEM", client.phone)
-        Log.v("NOTA_ITEM", client.storeNumber)
-        Log.v("NOTA_ITEM", client.idClient.toString())
-
         registerUpdateClient( client, TypeOperation.UPDATE)
 
     }

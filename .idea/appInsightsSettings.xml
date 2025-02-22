@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.jair.ventaspamsac" />
+                  <option name="mobileSdkAppId" value="1:197005806022:android:b2ca946ec44cdca19e8ac7" />
+                  <option name="projectId" value="pamsacventas" />
+                  <option name="projectNumber" value="197005806022" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

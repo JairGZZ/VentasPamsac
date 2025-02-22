@@ -22,7 +22,7 @@ import com.jair.ventaspamsac.ui.adapter.MarketAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
+class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
 
     private val binding get() = _binding!!
     private var _binding: FragmentHomeBinding? = null
@@ -151,17 +151,10 @@ class HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
     }
 
     override fun onItemClick(market: MarketItem) {
-
-        Log.v("NOTA_ITEM", market.district)
-        Log.v("NOTA_ITEM", market.name)
-        Log.v("NOTA_ITEM", market.idMarket.toString())
-
         val intent = Intent(requireContext(), ClientsActivity::class.java)
-
-
         intent.putExtra("id_market", market.idMarket)
 
-        // Reemplazar el fragmento actual con el fragmento de detalles
+        // Reemplazar el fragmento actual con el ativity clients
         startActivity(intent)
 
     }

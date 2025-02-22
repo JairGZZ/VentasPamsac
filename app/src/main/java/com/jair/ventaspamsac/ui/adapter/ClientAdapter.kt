@@ -3,7 +3,7 @@ package com.jair.ventaspamsac.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jair.ventaspamsac.databinding.ClientItemBinding
+import com.jair.ventaspamsac.databinding.ItemClientsBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
 import com.jair.ventaspamsac.ui.viewholder.ClientViewHolder
 import com.jair.ventaspamsac.ui.viewholder.MarketViewHolder
@@ -13,7 +13,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
     private var filteredList = emptyList<ClientItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientViewHolder {
-        val binding = ClientItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemClientsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ClientViewHolder(binding)
     }
 
@@ -26,6 +26,9 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
         holder.itemView.setOnClickListener {
 
             mItemListener.onItemClick(filteredList[position])
+        }
+        holder.binding.btnCreateNote.setOnClickListener {
+            mItemListener.onCreateNoteClick(filteredList[position].idClient)
         }
     }
 
@@ -48,5 +51,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
     }
     interface ItemClickListener {
         fun onItemClick(client: ClientItem)
+        fun onCreateNoteClick(clientId: Int)
+
     }
 }
