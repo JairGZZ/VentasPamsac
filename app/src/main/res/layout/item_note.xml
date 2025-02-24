@@ -7,37 +7,58 @@
     app:cardElevation="20dp"
     android:layout_margin="20dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/textDate"
+        <!-- Botón Compartir -->
+        <ImageButton
+            android:id="@+id/btnShare"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Boton de Compartir"
+            android:src="@android:drawable/ic_menu_share"
+            android:padding="5dp"
+            app:tint="#666666" />
+
+        <!-- Contenido -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="12/12/24"
-            android:textSize="12sp"/>
+            android:orientation="vertical"
+            android:layout_marginEnd="50dp">
 
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:text="sdsdsdsdsd"
-            android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="12/12/24"
+                android:textSize="14sp"
+                android:textColor="#888888"/>
 
-        <TextView
-            android:id="@+id/textDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sdsdsdsdsdsdsd"
-            android:maxLines="3" />
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:text="Título de la Nota"
+                android:textSize="18sp"
+                android:ellipsize="end"
+                android:textColor="#333333"/>
 
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción detallada de la nota"
+                android:textSize="16sp"
+                android:textColor="#666666" />
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

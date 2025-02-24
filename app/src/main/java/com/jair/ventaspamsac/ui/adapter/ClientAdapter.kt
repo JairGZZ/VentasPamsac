@@ -3,6 +3,7 @@ package com.jair.ventaspamsac.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.jair.ventaspamsac.databinding.ItemClientsBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
 import com.jair.ventaspamsac.ui.viewholder.ClientViewHolder
@@ -19,6 +20,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
 
     override fun getItemCount(): Int = filteredList.size
 
+
     override fun onBindViewHolder(holder: ClientViewHolder, position: Int) {
         val district = filteredList[position]
         holder.bind(district)
@@ -28,8 +30,9 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
             mItemListener.onItemClick(filteredList[position])
         }
         holder.binding.btnCreateNote.setOnClickListener {
-            mItemListener.onCreateNoteClick(filteredList[position].idClient)
+            mItemListener.onCreateNoteClick(filteredList[position].idClient ,filteredList[position].name )
         }
+
     }
 
     fun updateData(newItems: List<ClientItem>) {
@@ -51,7 +54,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
     }
     interface ItemClickListener {
         fun onItemClick(client: ClientItem)
-        fun onCreateNoteClick(clientId: Int)
+        fun onCreateNoteClick(clientId: Int, name:String)
 
     }
 }

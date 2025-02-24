@@ -19,10 +19,7 @@ class ClientsViewModel @Inject constructor( private val GetByMarketUseCase: GetB
     suspend fun insert(client: ClientItem) = InsertClientUseCase(client)
 
     suspend fun up(client: ClientItem) {
-
             updateClientUseCase(client)
-
-
     }
 
 

@@ -12,12 +12,13 @@ import com.jair.ventaspamsac.data.database.dao.SaleDetailDAO
 import com.jair.ventaspamsac.data.database.entities.ClientEntity
 import com.jair.ventaspamsac.data.database.entities.DistrictEntity
 import com.jair.ventaspamsac.data.database.entities.MarketEntity
+import com.jair.ventaspamsac.data.database.entities.NoteEntity
 import com.jair.ventaspamsac.data.database.entities.ProductEntity
 import com.jair.ventaspamsac.data.database.entities.SaleDetailEntity
 import com.jair.ventaspamsac.data.database.entities.SaleEntity
 
 @Database(
-    [ClientEntity::class, MarketEntity::class, DistrictEntity::class, ProductEntity::class, SaleEntity::class, SaleDetailEntity::class],
+    [ClientEntity::class, MarketEntity::class, DistrictEntity::class, ProductEntity::class, SaleEntity::class, SaleDetailEntity::class, NoteEntity::class],
     version = 1,
     exportSchema = true
 )

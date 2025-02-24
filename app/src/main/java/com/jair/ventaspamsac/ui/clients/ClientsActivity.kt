@@ -2,10 +2,8 @@ package com.jair.ventaspamsac.ui.clients
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,29 +16,28 @@ import com.jair.ventaspamsac.databinding.ActivityClientsBinding
 import com.jair.ventaspamsac.databinding.DialogClientBinding
 import com.jair.ventaspamsac.databinding.ItemClientsBinding
 import com.jair.ventaspamsac.domain.items.ClientItem
-import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.adapter.ClientAdapter
 import com.jair.ventaspamsac.ui.note.NoteActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
+class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener {
 
     private val clientsViewModel: ClientsViewModel by viewModels()
     private lateinit var binding: ActivityClientsBinding
     private lateinit var bindingD: DialogClientBinding
     private lateinit var bindingItem: ItemClientsBinding
-
     private var currentQuery = ""
     private lateinit var adapter: ClientAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         binding = ActivityClientsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
 
         val id = intent.getIntExtra("id_market", -1)
@@ -50,7 +47,7 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
                     adapter.updateData(it)
                     adapter.filter(currentQuery)
                     updateEmptyState()
-            }
+                }
             })
 
             setupRecyclerView()
@@ -62,9 +59,12 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
     }
 
 
-    override fun onCreateNoteClick(clientId: Int) {
+    override fun onCreateNoteClick(clientId: Int,name :String) {
         val intent = Intent(this, NoteActivity::class.java)
         intent.putExtra("id_client", clientId) // Pasa el ID del cliente
+        intent.putExtra("name_client", name) // Pasa el ID del cliente
+
+
         startActivity(intent)
     }
 
@@ -77,7 +77,6 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
     }
 
 
-
     private fun updateEmptyState() {
         if (adapter.itemCount == 0) {
             binding.txtEmptyState.visibility = View.VISIBLE
@@ -87,6 +86,7 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
             binding.recyclerMarkets.visibility = View.VISIBLE
         }
     }
+
     private fun setupSearchView() {
         binding.btnSearch.apply {
             queryHint = "Buscar mercado..."
@@ -102,13 +102,15 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
             })
         }
     }
+
     private fun setupFloatingButton() {
         binding.floatingRegister.setOnClickListener {
             registerUpdateClient(null, TypeOperation.REGISTER)
         }
     }
+
     override fun onItemClick(client: ClientItem) {
-        registerUpdateClient( client, TypeOperation.UPDATE)
+        registerUpdateClient(client, TypeOperation.UPDATE)
 
     }
 
@@ -118,7 +120,8 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_client, null)
         bindingD = DialogClientBinding.bind(mDialogView) // Inicializa bindingD aquí
 
-        val titleAlertNote = if (type == TypeOperation.UPDATE) "Actualizar Cliente" else "Agregar Cliente"
+        val titleAlertNote =
+            if (type == TypeOperation.UPDATE) "Actualizar Cliente" else "Agregar Cliente"
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle(titleAlertNote)
@@ -181,7 +184,7 @@ class ClientsActivity : AppCompatActivity(), ClientAdapter.ItemClickListener  {
         }
     }
 
-    }
+}
 
 
 

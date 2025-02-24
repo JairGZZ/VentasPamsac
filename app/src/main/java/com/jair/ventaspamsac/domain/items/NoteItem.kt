@@ -12,7 +12,7 @@ data class NoteItem(
 )
 fun NoteEntity.toNoteItem(): NoteItem {
     return NoteItem(
-        id = idClient,
+        id = idNote,
         title = title,
         content = description,
         date = date,

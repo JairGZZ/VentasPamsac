@@ -4,9 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import com.jair.ventaspamsac.data.database.DatabaseContext
 import com.jair.ventaspamsac.data.database.dao.ClientDAO
+import com.jair.ventaspamsac.data.database.dao.DistrictDAO
 //import com.jair.ventaspamsac.data.database.dao.DistrictDAO
 import com.jair.ventaspamsac.data.database.dao.MarketDAO
 import com.jair.ventaspamsac.data.database.dao.NoteDAO
+import com.jair.ventaspamsac.data.database.dao.ProductDAO
+import com.jair.ventaspamsac.data.database.dao.SaleDAO
+import com.jair.ventaspamsac.data.database.dao.SaleDetailDAO
 //import com.jair.ventaspamsac.data.database.dao.ProductDAO
 //import com.jair.ventaspamsac.data.database.dao.SaleDAO
 //import com.jair.ventaspamsac.data.database.dao.SaleDetailDAO
@@ -40,20 +44,20 @@ object RoomModule {
     @Provides
     fun provideMarketDAO(db: DatabaseContext): MarketDAO = db.marketDAO()
 
-//    @Singleton
-//    @Provides
-//    fun provideDistrictDAO(db: DatabaseContext): DistrictDAO = db.districtDAO()
-//
-//    @Singleton
-//    @Provides
-//    fun provideProductDAO(db: DatabaseContext): ProductDAO = db.productDAO()
-//
-//    @Singleton
-//    @Provides
-//    fun provideSaleDAO(db: DatabaseContext): SaleDAO = db.saleDAO()
-//
-//    @Singleton
-//    @Provides
-//    fun provideSaleDetailDAO(db: DatabaseContext): SaleDetailDAO = db.saleDetailDAO()
+    @Singleton
+    @Provides
+    fun provideDistrictDAO(db: DatabaseContext): DistrictDAO = db.districtDAO()
+
+    @Singleton
+    @Provides
+    fun provideProductDAO(db: DatabaseContext): ProductDAO = db.productDAO()
+
+    @Singleton
+    @Provides
+    fun provideSaleDAO(db: DatabaseContext): SaleDAO = db.saleDAO()
+
+    @Singleton
+    @Provides
+    fun provideSaleDetailDAO(db: DatabaseContext): SaleDetailDAO = db.saleDetailDAO()
 
 }

@@ -47,6 +47,7 @@ dependencies {
 
     //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.firebase.auth.ktx)
     ksp(libs.androidx.room.compiler)
     //room con soporte para corrutinas
     implementation(libs.androidx.room.ktx)
@@ -56,7 +57,10 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation(libs.firebase.bom)
+    //firebase auth
+    implementation(libs.firebase.auth)
+
 
 
     //otras

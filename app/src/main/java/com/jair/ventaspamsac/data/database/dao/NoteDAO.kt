@@ -13,7 +13,7 @@ interface NoteDAO  {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note: NoteEntity)
 
-    @Query("SELECT * FROM notes WHERE id_client = :clientId")
+    @Query("SELECT * FROM notes WHERE id_client = :clientId ORDER BY date DESC")
     fun getNotesByClientId(clientId: Int): LiveData<List<NoteEntity>>
 
     @Update
