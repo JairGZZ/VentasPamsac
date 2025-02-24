@@ -33,6 +33,7 @@ class ClientAdapter ( private val mItemListener: ItemClickListener ) : RecyclerV
             mItemListener.onCreateNoteClick(filteredList[position].idClient ,filteredList[position].name )
         }
 
+
     }
 
     fun updateData(newItems: List<ClientItem>) {
