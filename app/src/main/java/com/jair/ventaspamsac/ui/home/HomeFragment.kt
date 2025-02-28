@@ -13,21 +13,23 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jair.ventaspamsac.ui.clients.ClientsActivity
 import com.jair.ventaspamsac.R
 import com.jair.ventaspamsac.data.TypeOperation
+import com.jair.ventaspamsac.data.database.entities.MarketEntity
 import com.jair.ventaspamsac.databinding.FragmentHomeBinding
-import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.adapter.MarketAdapter
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
 
+
     private val binding get() = _binding!!
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var adapter: MarketAdapter
     private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var adapter: MarketAdapter
+//
     private var currentQuery = ""
 
     override fun onCreateView(
@@ -41,13 +43,15 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//
+        homeViewModel.loadMarkets()
 
         setupRecyclerView()
         setupObservers()
         setupSearchView()
         setupFloatingButton()
     }
-
+//
     private fun setupRecyclerView() {
         adapter = MarketAdapter(this)
         binding.recyclerMarkets.apply {
@@ -55,7 +59,7 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
             adapter = this@HomeFragment.adapter
         }
     }
-
+//
     private fun setupObservers() {
         homeViewModel.items.observe(viewLifecycleOwner) { items ->
             adapter.updateData(items)
@@ -63,7 +67,7 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
             updateEmptyState()
         }
     }
-
+//
     private fun setupSearchView() {
         binding.btnSearch.apply {
             queryHint = "Buscar mercado..."
@@ -85,8 +89,8 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
             registerUpdateMarket(null, TypeOperation.REGISTER)
         }
     }
-
-    private fun registerUpdateMarket(market: MarketItem?, type: TypeOperation) {
+//
+    private fun registerUpdateMarket(market: MarketEntity?, type: TypeOperation) {
         val mDialogView = LayoutInflater.from(requireContext())
             .inflate(R.layout.dialog_market, null)
         val titleAlertNote = "Agregar Mercado"
@@ -124,22 +128,20 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
 
             mAlertDialog.dismiss()
 
-            val marketItem = MarketItem(
-                idMarket = 0,
+            val marketItem = MarketEntity(
                 name = name,
                 district = district
             )
 
             if (type == TypeOperation.UPDATE) {
-                marketItem.idMarket = market!!.idMarket
-                homeViewModel.updateMarket(marketItem)
+//                homeViewModel.updateMarket(marketItem)
             } else {
                 homeViewModel.insertMarket(marketItem)
             }
         }
     }
-
-
+//
+//
     private fun updateEmptyState() {
         if (adapter.itemCount == 0) {
             binding.txtEmptyState.visibility = View.VISIBLE
@@ -149,13 +151,13 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
             binding.recyclerMarkets.visibility = View.VISIBLE
         }
     }
-
-    override fun onItemClick(market: MarketItem) {
-        val intent = Intent(requireContext(), ClientsActivity::class.java)
-        intent.putExtra("id_market", market.idMarket)
-
-        // Reemplazar el fragmento actual con el ativity clients
-        startActivity(intent)
+//
+    override fun onItemClick(market: MarketEntity) {
+//        val intent = Intent(requireContext(), ClientsActivity::class.java)
+//        intent.putExtra("id_market", market.idMarket)
+//
+//        // Reemplazar el fragmento actual con el ativity clients
+//        startActivity(intent)
 
     }
 

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:name=".VentasPamsacApplication"
         android:allowBackup="true"
@@ -21,18 +21,11 @@
             android:label="@string/app_name">
 
         </activity>
-        <activity android:name=".ui.clients.ClientsActivity"
-            android:exported="true"
-            android:label="@string/app_name">
 
-        </activity>
-
-        <activity android:name=".ui.note.NoteActivity"
-            android:exported="true"
-            android:label="@string/app_name"/>
         <activity android:name=".ui.AuthenticationActivity"
             android:exported="true"
             android:label="@string/app_name">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

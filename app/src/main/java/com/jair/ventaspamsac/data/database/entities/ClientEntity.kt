@@ -6,34 +6,13 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = ClientEntity.TABLE_NAME,
-    foreignKeys = [
-        ForeignKey(
-            entity = MarketEntity::class,
-            parentColumns = ["id_market"],
-            childColumns = ["id_market"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ],
-    indices = [Index(value = ["id_market"])]
-)
+
 data class ClientEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id_client")
+
     var idClient: Int = 0,
-    @ColumnInfo(name = "name")
-    val name: String,
-    @ColumnInfo(name = "last_name_client")
-    val lastName: String,
-    @ColumnInfo(name = "phone_client")
-    val phone: String,
-    @ColumnInfo(name = "store_number_client")
-    val storeNumber: String,
-    @ColumnInfo(name = "id_market")
-    val idMarket: Int
-) {
-    companion object {
-        const val TABLE_NAME = "clients"
-    }
-}
+    var name: String,
+    var lastName: String,
+    var phone: String,
+    var storeNumber: String,
+    var idMarket: Int
+)

@@ -3,14 +3,14 @@ package com.jair.ventaspamsac.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jair.ventaspamsac.data.database.entities.MarketEntity
 import com.jair.ventaspamsac.databinding.MarketItemBinding
-import com.jair.ventaspamsac.domain.items.MarketItem
 import com.jair.ventaspamsac.ui.viewholder.MarketViewHolder
 
 class MarketAdapter(private val mItemListener: ItemClickListener) : RecyclerView.Adapter<MarketViewHolder>() {
 
-    private var originalList = emptyList<MarketItem>()
-    private var filteredList = emptyList<MarketItem>()
+    private var originalList = emptyList<MarketEntity>()
+    private var filteredList = emptyList<MarketEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
         val binding = MarketItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -29,7 +29,7 @@ class MarketAdapter(private val mItemListener: ItemClickListener) : RecyclerView
         }
     }
 
-    fun updateData(newItems: List<MarketItem>) {
+    fun updateData(newItems: List<MarketEntity>) {
         originalList = newItems
         filteredList = newItems
         notifyDataSetChanged()
@@ -47,7 +47,7 @@ class MarketAdapter(private val mItemListener: ItemClickListener) : RecyclerView
         notifyDataSetChanged()
     }
     interface ItemClickListener {
-        fun onItemClick(market: MarketItem)
+        fun onItemClick(market: MarketEntity)
     }
 }
-    
+

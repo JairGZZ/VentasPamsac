@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:id="@+id/btn_cerrar_sesion"
+        />
+
 
 
 </LinearLayout>
