@@ -18,6 +18,7 @@ import com.jair.ventaspamsac.data.TypeOperation
 import com.jair.ventaspamsac.data.database.entities.MarketEntity
 import com.jair.ventaspamsac.databinding.FragmentHomeBinding
 import com.jair.ventaspamsac.ui.adapter.MarketAdapter
+import com.jair.ventaspamsac.ui.clients.ClientsActivity
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +52,7 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
         setupSearchView()
         setupFloatingButton()
     }
-//
+
     private fun setupRecyclerView() {
         adapter = MarketAdapter(this)
         binding.recyclerMarkets.apply {
@@ -152,13 +153,10 @@ class   HomeFragment : Fragment(), MarketAdapter.ItemClickListener {
         }
     }
 //
-    override fun onItemClick(market: MarketEntity) {
-//        val intent = Intent(requireContext(), ClientsActivity::class.java)
-//        intent.putExtra("id_market", market.idMarket)
-//
-//        // Reemplazar el fragmento actual con el ativity clients
-//        startActivity(intent)
-
+    override fun onItemClick(market: MarketEntity){
+        val intent = Intent(requireContext(), ClientsActivity::class.java)
+    intent.putExtra("id_market", market.id)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

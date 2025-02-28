@@ -9,10 +9,17 @@ import androidx.room.PrimaryKey
 
 data class ClientEntity(
 
-    var idClient: Int = 0,
-    var name: String,
-    var lastName: String,
-    var phone: String,
-    var storeNumber: String,
-    var idMarket: Int
+    var idClient: String = "",
+    var name: String = "",
+    var lastName: String = "",
+    var phone: String = "",
+    var storeNumber: String = "",
 )
+
+fun ClientEntity.toMap(): Map<String, Any> = hashMapOf(
+    "name" to name,
+    "lastName" to lastName,
+    "phone" to phone,
+    "storeNumber" to storeNumber,
+)
+

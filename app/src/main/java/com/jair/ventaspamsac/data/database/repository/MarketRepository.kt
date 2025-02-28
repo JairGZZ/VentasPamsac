@@ -1,17 +1,12 @@
 package com.jair.ventaspamsac.data.database.repository
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
-import androidx.room.util.query
+
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jair.ventaspamsac.data.database.entities.MarketEntity
-import com.jair.ventaspamsac.data.database.repository.states.AuthResult
+import com.jair.ventaspamsac.data.database.entities.toMap
 import com.jair.ventaspamsac.domain.usecases.auth.GetCurrentUserUseCase
 import kotlinx.coroutines.tasks.await
-import java.io.Console
-
 import javax.inject.Inject
 
 class MarketRepository @Inject constructor(private val firestore: FirebaseFirestore, private val getCurrentUserUseCase: GetCurrentUserUseCase) {
@@ -22,7 +17,6 @@ class MarketRepository @Inject constructor(private val firestore: FirebaseFirest
             Log.e("Firestore", "Usuario no autenticado")
             return
         }
-
         Log.d("Firestore", "Usuario autenticado con ID: ${currentUser.id}")
         try {
             firestore.collection("users") // Accede a la colección users
@@ -37,41 +31,43 @@ class MarketRepository @Inject constructor(private val firestore: FirebaseFirest
     }
 
     suspend fun getAllMarkets(): List<MarketEntity> {
-            val currentUser = getCurrentUserUseCase()
-            if (currentUser == null) {
-                Log.e("Firestore", "Usuario no autenticado")
-                return emptyList()
-            }
+        val currentUser = getCurrentUserUseCase()
+        if (currentUser == null) {
+            Log.e("Firestore", "Usuario no autenticado")
+            return emptyList()
+        }
+        return try {
+            val snapshot = firestore.collection("users") // Accede a la colección users
+                .document(currentUser.id) // Accede al documento del usuario autenticado
+                .collection("markets") // Accede a la subcolección markets del usuario
+                .get() // Obtiene todos los documentos en la subcolección
+                .await()
 
-            return try {
-                val snapshot = firestore.collection("users") // Accede a la colección users
-                    .document(currentUser.id) // Accede al documento del usuario autenticado
-                    .collection("markets") // Accede a la subcolección markets del usuario
-                    .get() // Obtiene todos los documentos en la subcolección
-                    .await()
-
-                // Convierte los documentos en objetos MarketEntity
-                snapshot.documents.mapNotNull { document ->
-                    try {
-                        document.toObject(MarketEntity::class.java)
-                    } catch (e: Exception) {
-                        Log.e("Firestore", "Error al deserializar el documento", e)
+            // Convierte los documentos en objetos MarketItem
+            snapshot.documents.mapNotNull { document ->
+                try {
+                    val market = document.toObject(MarketEntity::class.java)
+                    if (market != null) {
+                        MarketEntity(
+                            id = document.id, // Incluye el ID del documento
+                            name = market.name,
+                            district = market.district
+                        )
+                    } else {
                         null
                     }
+                } catch (e: Exception) {
+                    Log.e("Firestore", "Error al deserializar el documento", e)
+                    null
                 }
-            } catch (e: Exception) {
-                Log.e("Firestore", "Error al obtener los markets del usuario", e)
-                emptyList()
             }
-
-
+        } catch (e: Exception) {
+            Log.e("Firestore", "Error al obtener los markets del usuario", e)
+            emptyList()
+        }
     }
 //    suspend fun updateMarket(market: MarketItem) {
 //        marketDAO.updateMarket(market.toMarketEntity())
 //    }
-private fun MarketEntity.toMap(): Map<String, Any> = hashMapOf(
-    "name" to name,
-    "district" to district
-)
 
 }
